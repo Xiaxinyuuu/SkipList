@@ -8,7 +8,7 @@ SkipList的 C ++ 实现。
 # 二、详细设计
 ## 3.1跳表类设计实现
 ### 如何使用基本数据结构表示跳表
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=4f431f993f654d0184ecf92aee421ff7&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw)
+![]()
 图片展示了清晰展示了跳表的结构，可以到跳表与单链表的在表示上的区别主要为以下3点
 1. 跳表中存在多级索引，每一级索引都可以看作一条单链表
 2. 为了加速查找性能，跳表中的每级索引对应的单链表都是有序的
@@ -45,7 +45,7 @@ A.level[4] = G;
 跳表这个数据结构存在的意义就是为了缩短数据查询时间，提高查询性能。  
 设计思想采用空间换取时间，所以在单链表的基础上构造了多级索引。   
 那么如何利用多级索引实现高效的数据查找就成了关键所在，下面先看一下单链表的查找过程。
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=a4e0964000854a58a41c0268d8110b9c&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw)
+![]()
 使用代码表示上图查找过程
 ```c++
 int x = 5;
@@ -56,7 +56,7 @@ while (cur != NULL && cur->val != x) {
 // 如果cur不等于NULL则说明找到了目标元素
 ```
 跳表的查找过程则充分发挥了多级索引和有序链表的优势，大大提升了查询效率
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=375efa2c6fa8444bafdeed77f95d8b39&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw&x-bce-process=image/resize,m_lfit,w_1920/ignore-error,i_1)
+![]()
 使用代码表示上图查找过程
 ```c++
 int level_num = dum_head_node->level.size() - 1;
@@ -107,7 +107,7 @@ int64_t SkipList::calculate_score(const std::string &key) {
    a. 删除节点的前一个节点指向删除节点的下一个节点
    跳表的删除操作和单链表的删除操作实现思路上是一致的
 先来看下单链表删除操作的流程
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=d3bd784c5a9e477aafde1fc5163c39d0&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw)
+![]()
 用代码表示上图删除过程
 ```c++
 Node *B = A->next;
@@ -116,7 +116,7 @@ delete B;
 ```
 跳表和单链表的主要区别在于多级索引的存在，所以每一级索引中的对应节点都需要进行删除
 下面是跳表中删除节点的流程
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=7cc02dab0ea141f4ad3be6d07dc44426&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw)
+![]()
 用代码表示上图删除过程
 ```c++
 // levels_prev[i]表示插入节点的第i层对应的前一个节点
@@ -133,7 +133,7 @@ delete del;
 2. 执行具体的插入操作
 
 先来看下单链表的插入流程
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=7a4c15b8d45f42fe85a0999c96d22c39&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..lJny6gymJm6DDDKD.xaz1DxR0aPHe-usSX5Eza8d81hoW2BNioBy8rEAWglGmASSqmHSuVvViOcZhVcNDk_TIrA_d-HKsMO99yDuNk-JK0e_B1oOlj2voUzw8oZZxrN3f8eE0S8aVVnGbqQ5BMEYUWSgDndoI-VKFTMqJ1Dcu79SLYrGcLTZYwJ2eZ9mCTIVd4W4C3yAiCRur6E6Z1c1dr-HaokaMKU22n9X9S1Hj1g.b7ywoGoUPVUF9ahAYMcDHw)
+![]()
 用代码表示上述插入过程
 ```c++
 N->next = A->next; // dum->next即原来的真正头节点
@@ -163,7 +163,7 @@ unsigned int calculate_level_num() {
 }
 ```
 确认好新插入节点的索引层级后，就可以进行插入操作了，下面是跳表中插入节点的流程
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=a1bc0cdd2b7d43ef9df4cfe850953060&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..-HBF0yET3KiKnhvg.pHzAUbBrIsQxPQy1jb61PMbyrlN61IUkQQmsgst2bEzm4Wl6uFWsp7409UzbQXmXeXpAkiZ-LgCkx87ugeX0yeJg9OknaEBUCqKuM3ad8p11CB8bP43zWdxB0tcj3LKIsk2AlLpYDk_j2v5Nm9xc3J-Lk-I23yPhgYYBAWqbAwkZlvMooIUeZL2TvfNRPTfKpDDBOGgELLXTZJdVus3Gb9v8eg.mbgNfbFj1w4GwT2V745KIQ)
+![]()
 用代码表示上述插入过程
 ```c++
 int level_num = calculate_index_level_num() + 1; //level_num代表要插入节点的层级 
@@ -195,7 +195,7 @@ for (int i = 0; i < level_num; i ++) {
 即：H = h + 1 = (log₂n) - 1 + 1 = log₂n
 ### 比较次数N
 每个层级最多比较2个节点
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=ff273438e8d14a95889e5bf7aba44a71&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..-HBF0yET3KiKnhvg.pHzAUbBrIsQxPQy1jb61PMbyrlN61IUkQQmsgst2bEzm4Wl6uFWsp7409UzbQXmXeXpAkiZ-LgCkx87ugeX0yeJg9OknaEBUCqKuM3ad8p11CB8bP43zWdxB0tcj3LKIsk2AlLpYDk_j2v5Nm9xc3J-Lk-I23yPhgYYBAWqbAwkZlvMooIUeZL2TvfNRPTfKpDDBOGgELLXTZJdVus3Gb9v8eg.mbgNfbFj1w4GwT2V745KIQ&x-bce-process=image/resize,m_lfit,w_1920/ignore-error,i_1)
+![]()
 还是用上面的查找流程图为例，采用反证法来说明为什么每个层级最多比较3个节点。  
 证明步骤：
 1. 假设在第四层级比较了4个节点，分别是C，D，E，F。 
@@ -214,14 +214,14 @@ for (int i = 0; i < level_num; i ++) {
 所以跳表中总数据个数：N = n + n = 2n
 ##### 空间复杂度：O(N) = O(2n) = O(n)
 ## 3.2KV服务设计实现
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=7cd423e525b44cf1857b5a55db693758&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..-HBF0yET3KiKnhvg.pHzAUbBrIsQxPQy1jb61PMbyrlN61IUkQQmsgst2bEzm4Wl6uFWsp7409UzbQXmXeXpAkiZ-LgCkx87ugeX0yeJg9OknaEBUCqKuM3ad8p11CB8bP43zWdxB0tcj3LKIsk2AlLpYDk_j2v5Nm9xc3J-Lk-I23yPhgYYBAWqbAwkZlvMooIUeZL2TvfNRPTfKpDDBOGgELLXTZJdVus3Gb9v8eg.mbgNfbFj1w4GwT2V745KIQ&x-bce-process=image/resize,m_lfit,w_1920/ignore-error,i_1)
+![]()
 基于thrift框架搭建CS架构的KV服务，系统架构图如上所述
 ## 3.3多线程并发读取实现
 搭配std::shared_mutex、std::shared_lock、std::unique_lock实现读写锁来支持多线程的并发读取操作  
 所有读操作，std::shared_lock来获取锁，允许多个读操作并发执行。  
 所有写操作，使用std::unique_lock来获取锁，确保在写入时没有其他读操作或写操作在执行。
 ## 三、单测覆盖率统计
-![](https://rte.weiyun.baidu.com/wiki/attach/image/api/imageDownloadAddress?attachId=a9efd86ae23146158cf91cd04c906633&docGuid=4heTieHNzcfZXx&sign=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiYXBwSWQiOjEsInVpZCI6IkE0WnJNYWFaYWQiLCJkb2NJZCI6IjRoZVRpZUhOemNmWlh4In0..-HBF0yET3KiKnhvg.pHzAUbBrIsQxPQy1jb61PMbyrlN61IUkQQmsgst2bEzm4Wl6uFWsp7409UzbQXmXeXpAkiZ-LgCkx87ugeX0yeJg9OknaEBUCqKuM3ad8p11CB8bP43zWdxB0tcj3LKIsk2AlLpYDk_j2v5Nm9xc3J-Lk-I23yPhgYYBAWqbAwkZlvMooIUeZL2TvfNRPTfKpDDBOGgELLXTZJdVus3Gb9v8eg.mbgNfbFj1w4GwT2V745KIQ)
+![]()
 主要代码文件skip_list.cpp行覆盖率93%，分支覆盖率81%
 ## 四、性能测试
 ### 测试环境
