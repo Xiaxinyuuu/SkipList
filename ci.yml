@@ -1,0 +1,22 @@
+Global:
+  version: 2.0
+
+Default:
+  profile: [change]
+
+Profiles:
+  - profile:
+    name: change
+    mode: BCLOUD
+    build:
+      command: bcloud ut --no-output
+    artifacts:
+      release: true
+
+  - profile:
+    name: merge
+    mode: BCLOUD
+    build:
+      command: bcloud ut --no-output
+    artifacts:
+      release: true
